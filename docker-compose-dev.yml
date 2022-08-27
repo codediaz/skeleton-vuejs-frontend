@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: DockerFile-dev
+    working_dir: /usr/src/app
+    container_name: skeleton-vuejs-frontend
+    restart: unless-stopped
+
+    volumes:
+      - ./:/usr/src/app
+      
+    stdin_open: true
+    tty: true
+    ports:
+      - "${SERVER_PORT}:8080"
+    networks:
+      - skeleton-vuejs-frontend
+
+networks:
+  skeleton-vuejs-frontend:
+    external:
+      name: develop-with-vpn
